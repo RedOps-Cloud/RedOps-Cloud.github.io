@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/assets/favicon.jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOLCloud</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<script>
+    function filterCommands() {
+        const query = document.getElementById('searchBox').value.toLowerCase();
+        const tables = ['azureTable', 'gcpTable', 'awsTable'];
+        
+        tables.forEach(tableId => {
+            const rows = document.querySelectorAll(`#${tableId} tbody tr`);
+            
+            rows.forEach(row => {
+                const techniqueName = row.cells[0].textContent.toLowerCase();
+                const command = row.cells[1].textContent.toLowerCase();
+                
+                if (techniqueName.includes(query) || command.includes(query)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    }
+</script>
+
+<nav style="text-align: center; margin-top: 20px;">
+    <a href="index.html" style="margin-right: 15px; text-decoration: none; color: #171717;">Home</a>
+    <a href="about.html" style="text-decoration: none; color: #171717;">About</a>
+</nav>
+
+<div class="header-box">
+    <div>
+        <h2>Living Off The Land Cloud (LOLCloud)</h2>
+        <h4>Exploiting Native Cloud Techniques for Security</h4>
+        <p>The <strong>LOLCloud</strong> project provides a curated collection of native cloud commands and techniques for Red Team, Pentest, and cloud exploitation in GCP, Azure, and AWS. This resource leverages cloud provider commands for reconnaissance, privilege escalation, and other tactics, helping defenders better secure cloud configurations and improve monitoring capabilities.</p>
+        <p>For contributions and guidelines, please see the <a href="https://github.com/LOLCloud-Project/LOLCloud-Project.github.io/tree/main">contribution guide</a>.</p>
+        <p><span style="font-style: italic;">MITRE ATT&CK® and ATT&CK® are registered trademarks of The MITRE Corporation.</span> You can explore the ATT&CK® Navigator mapping of this project on the <a href="https://mitre-attack.github.io/attack-navigator/#layerURL=/mitre_attack_navigator_layer.json">ATT&CK® Navigator</a>.</p>
+		        <p>Explore other useful resources:</p>
+        <ul>
+            <li>For UNIX binaries, visit <a href="https://gtfobins.github.io/">gtfobins.github.io</a>.</li>
+	    <br>
+            <li>For Windows binaries, visit <a href="https://lolbas-project.github.io/">lolbas-project.github.io</a>.</li>
+            <li>For application-based techniques, visit <a href="https://lolapps-project.github.io/">lolapps-project.github.io</a>.</li>
+            <li>For Vulnerable Drivers to BYOVD Techniques, visit <a href="https://www.loldrivers.io/">loldrivers.io</a>.</li>
+            <li>For Active Directory exploitation techniques, visit the <a href="https://lolad-project.github.io/index.html">lolad-project.github.io</a>.</li>
+        </ul>
+    </div>
+</div>
+    </div>
+</div>
+
+<h3>Cloud Exploitation Techniques and Commands</h3>
+
+<!-- Campo de Pesquisa Global -->
+<nav style="text-align: center; margin: 20px;">
+    <input type="text" id="searchBox" placeholder="Search all commands..." onkeyup="filterCommands()" style="padding: 10px; width: 50%;">
+</nav>
+
+<!-- Azure Section -->
+<h4>Azure</h4>
+<table id="azureTable" border="1" cellpadding="10" cellspacing="0" width="100%" style="margin-top: 20px;">
+    <thead>
+        <tr>
+            <th>Technique/Command Name</th>
+            <th>Command</th>
+            <th>Reference</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>List VMs</td>
+            <td><code>az vm list --output table</code></td>
+            <td><a href="https://docs.microsoft.com/azure/virtual-machines/linux/quick-create-cli" target="_blank">Azure Docs</a></td>
+        </tr>
+        <tr>
+            <td>Access Activity Logs</td>
+            <td><code>az monitor activity-log list</code></td>
+            <td><a href="https://docs.microsoft.com/azure/azure-monitor/essentials/activity-log" target="_blank">Azure Docs</a></td>
+        </tr>
+        <tr>
+            <td>List Key Vault Keys</td>
+            <td><code>az keyvault key list --vault-name [vault_name]</code></td>
+            <td><a href="https://learn.microsoft.com/cli/azure/keyvault/key" target="_blank">Azure Docs</a></td>
+        </tr>
+        <tr>
+            <td>List Resource Groups</td>
+            <td><code>az group list --output table</code></td>
+            <td><a href="https://learn.microsoft.com/cli/azure/group" target="_blank">Azure CLI</a></td>
+        </tr>
+        <tr>
+            <td>List SQL Servers</td>
+            <td><code>az sql server list</code></td>
+            <td><a href="https://learn.microsoft.com/cli/azure/sql/server" target="_blank">Azure Docs</a></td>
+        </tr>
+        <tr>
+            <td>Enumerate Public IP Addresses</td>
+            <td><code>az network public-ip list --output table</code></td>
+            <td><a href="https://learn.microsoft.com/cli/azure/network/public-ip" target="_blank">Azure Docs</a></td>
+        </tr>
+        <tr>
+            <td>List All Role Assignments</td>
+            <td><code>az role assignment list --all</code></td>
+            <td><a href="https://learn.microsoft.com/en-us/cli/azure/role" target="_blank">Azure CLI</a></td>
+        </tr>
+        <tr>
+            <td>Enumerate Storage Account Access Keys</td>
+            <td><code>az storage account keys list --account-name [account_name]</code></td>
+            <td><a href="https://learn.microsoft.com/cli/azure/storage/account/keys" target="_blank">Azure Docs</a></td>
+        </tr>
+        <tr>
+            <td>List Network Security Groups</td>
+            <td><code>az network nsg list --output table</code></td>
+            <td><a href="https://learn.microsoft.com/cli/azure/network/nsg" target="_blank">Azure Docs</a></td>
+        </tr>
+		<tr>
+			<td>Get Active Directory User</td>
+			<td><code>Get-AzADUser -DisplayName [UserName]</code></td>
+			<td><a href="https://learn.microsoft.com/en-us/powershell/module/az.resources/get-azaduser" target="_blank">Azure Docs</a></td>
+		</tr>
+		<tr>
+			<td>Enumerate Virtual Network Subnets</td>
+			<td><code>az network vnet subnet list --resource-group [RG_NAME] --vnet-name [VNET_NAME]</code></td>
+			<td><a href="https://learn.microsoft.com/en-us/cli/azure/network/vnet/subnet" target="_blank">Azure Docs</a></td>
+		</tr>
+		<tr>
+			<td>Check Key Vault Access Policies</td>
+			<td><code>az keyvault show --name [VAULT_NAME] --query "properties.accessPolicies"</code></td>
+			<td><a href="https://learn.microsoft.com/en-us/cli/azure/keyvault" target="_blank">Azure Docs</a></td>
+		</tr>
+		<tr>
+			<td>List SQL Servers in Subscription</td>
+			<td><code>az sql server list</code></td>
+			<td><a href="https://learn.microsoft.com/en-us/cli/azure/sql/server" target="_blank">Azure CLI</a></td>
+		</tr>
+		<tr>
+			<td>Access Managed Identity Token</td>
+			<td><code>curl -H "Metadata:true" "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2019-08-01&resource=https://management.azure.com"</code></td>
+			<td><a href="https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/how-to-use-vm-token" target="_blank">Azure Docs</a></td>
+		</tr>
+		<tr>
+			<td>View Storage Account Keys</td>
+			<td><code>az storage account keys list --account-name [ACCOUNT_NAME]</code></td>
+			<td><a href="https://learn.microsoft.com/en-us/cli/azure/storage/account/keys" target="_blank">Azure Docs</a></td>
+		</tr>
+		<tr>
+			<td>Identify Public-Facing IPs</td>
+			<td><code>az network public-ip list --query "[].ipAddress"</code></td>
+			<td><a href="https://learn.microsoft.com/en-us/cli/azure/network/public-ip" target="_blank">Azure CLI</a></td>
+		</tr>
+		<tr>
+			<td>List Web App Configurations</td>
+			<td><code>az webapp config appsettings list --name [APP_NAME] --resource-group [RG_NAME]</code></td>
+			<td><a href="https://learn.microsoft.com/en-us/cli/azure/webapp/config/appsettings" target="_blank">Azure CLI</a></td>
+		</tr>
+		<tr>
+			<td>Check Azure Function App Settings</td>
+			<td><code>az functionapp config appsettings list --name [FUNCTION_NAME] --resource-group [RG_NAME]</code></td>
+			<td><a href="https://learn.microsoft.com/en-us/cli/azure/functionapp/config/appsettings" target="_blank">Azure CLI</a></td>
+		</tr>
+		<tr>
+			<td>List Load Balancer Rules</td>
+			<td><code>az network lb rule list --resource-group [RG_NAME] --lb-name [LB_NAME]</code></td>
+			<td><a href="https://learn.microsoft.com/en-us/cli/azure/network/lb/rule" target="_blank">Azure CLI</a></td>
+		</tr>
+		<tr>
+			<td>Get Network Interface Info</td>
+			<td><code>az network nic show --ids [NIC_ID]</code></td>
+			<td><a href="https://learn.microsoft.com/en-us/cli/azure/network/nic" target="_blank">Azure CLI</a></td>
+		</tr>
+		<tr>
+			<td>Enumerate Service Principals</td>
+			<td><code>az ad sp list --all --query "[].displayName"</code></td>
+			<td><a href="https://learn.microsoft.com/en-us/cli/azure/ad/sp" target="_blank">Azure CLI</a></td>
+		</tr>
+
+
+    </tbody>
+</table>
+
+<!-- GCP Section -->
+<h4>GCP</h4>
+<table id="gcpTable" border="1" cellpadding="10" cellspacing="0" width="100%" style="margin-top: 20px;">
+    <thead>
+        <tr>
+            <th>Technique/Command Name</th>
+            <th>Command</th>
+            <th>Reference</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>List Instances</td>
+            <td><code>gcloud compute instances list</code></td>
+            <td><a href="https://cloud.google.com/sdk/gcloud/reference/compute/instances/list" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>List IAM Policies</td>
+            <td><code>gcloud projects get-iam-policy PROJECT_ID</code></td>
+            <td><a href="https://cloud.google.com/sdk/gcloud/reference/projects/get-iam-policy" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>List Firewall Rules</td>
+            <td><code>gcloud compute firewall-rules list</code></td>
+            <td><a href="https://cloud.google.com/sdk/gcloud/reference/compute/firewall-rules/list" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>View Audit Logs</td>
+            <td><code>gcloud logging read "logName=projects/[PROJECT_ID]/logs/cloudaudit.googleapis.com%2Factivity"</code></td>
+            <td><a href="https://cloud.google.com/logging/docs/reference/tools/gcloud-logging" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>List Cloud Storage Buckets</td>
+            <td><code>gsutil ls</code></td>
+            <td><a href="https://cloud.google.com/storage/docs/gsutil/commands/ls" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>List API Services</td>
+            <td><code>gcloud services list --available</code></td>
+            <td><a href="https://cloud.google.com/sdk/gcloud/reference/services/list" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>Get Service Account Tokens</td>
+            <td><code>gcloud auth print-access-token --impersonate-service-account [email]</code></td>
+            <td><a href="https://cloud.google.com/sdk/gcloud/reference/auth/print-access-token" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>Check IAM Policies for Project</td>
+            <td><code>gcloud projects get-iam-policy [project-id] --flatten="bindings[].members"</code></td>
+            <td><a href="https://cloud.google.com/sdk/gcloud/reference" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>List VPC Networks</td>
+            <td><code>gcloud compute networks list</code></td>
+            <td><a href="https://cloud.google.com/vpc/docs/vpc" target="_blank">GCP Docs</a></td>
+        </tr>
+		        <tr>
+            <td>Enumerate IAM Roles</td>
+            <td><code>gcloud iam roles list</code></td>
+            <td><a href="https://cloud.google.com/sdk/gcloud/reference/iam/roles" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>View Service Account Key</td>
+            <td><code>gcloud iam service-accounts keys list --iam-account [SERVICE_ACCOUNT_EMAIL]</code></td>
+            <td><a href="https://cloud.google.com/sdk/gcloud/reference/iam/service-accounts/keys/list" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>Retrieve Metadata Token</td>
+            <td><code>curl -H "Metadata-Flavor: Google" "http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token"</code></td>
+            <td><a href="https://cloud.google.com/compute/docs/metadata" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>List Cloud Functions</td>
+            <td><code>gcloud functions list</code></td>
+            <td><a href="https://cloud.google.com/functions/docs/reference/gcloud" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>Get Secret Value</td>
+            <td><code>gcloud secrets versions access latest --secret=[SECRET_NAME]</code></td>
+            <td><a href="https://cloud.google.com/secret-manager/docs/access-control" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>Access Project IAM Policy</td>
+            <td><code>gcloud projects get-iam-policy [PROJECT_ID]</code></td>
+            <td><a href="https://cloud.google.com/sdk/gcloud/reference/projects/get-iam-policy" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>Enable Service Account Impersonation</td>
+            <td><code>gcloud auth print-access-token --impersonate-service-account [SERVICE_ACCOUNT_EMAIL]</code></td>
+            <td><a href="https://cloud.google.com/iam/docs/impersonating-service-accounts" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>List VPC Networks</td>
+            <td><code>gcloud compute networks list</code></td>
+            <td><a href="https://cloud.google.com/vpc/docs/vpc" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>List Compute Instances with Details</td>
+            <td><code>gcloud compute instances describe [INSTANCE_NAME] --zone=[ZONE]</code></td>
+            <td><a href="https://cloud.google.com/compute/docs/instances" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>Access Logs for Activity</td>
+            <td><code>gcloud logging read "resource.type=gce_instance"</code></td>
+            <td><a href="https://cloud.google.com/logging/docs/view/advanced-queries" target="_blank">GCP Docs</a></td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- AWS Section -->
+<h4>AWS</h4>
+<table id="awsTable" border="1" cellpadding="10" cellspacing="0" width="100%" style="margin-top: 20px;">
+    <thead>
+        <tr>
+            <th>Technique/Command Name</th>
+            <th>Command</th>
+            <th>Reference</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>List EC2 Instances</td>
+            <td><code>aws ec2 describe-instances</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>List IAM Policies</td>
+            <td><code>aws iam list-policies</code></td>
+            <td><a href="https://awscli.amazonaws.com/v2/documentation/api/latest/reference/index.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>Get Account Summary</td>
+            <td><code>aws iam get-account-summary</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/iam/get-account-summary.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>List CloudWatch Log Groups</td>
+            <td><code>aws logs describe-log-groups</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/logs/describe-log-groups.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>List Elastic Load Balancers</td>
+            <td><code>aws elb describe-load-balancers</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/elb/describe-load-balancers.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>List Security Groups</td>
+            <td><code>aws ec2 describe-security-groups</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-security-groups.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>Describe Lambda Functions</td>
+            <td><code>aws lambda list-functions</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/lambda/list-functions.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>Get RDS Instances</td>
+            <td><code>aws rds describe-db-instances</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>CloudTrail Event Lookup</td>
+            <td><code>aws cloudtrail lookup-events</code></td>
+            <td><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>List S3 Buckets</td>
+            <td><code>aws s3 ls</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/s3/ls.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>Enumerate IAM Users</td>
+            <td><code>aws iam list-users</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/iam/list-users.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>List Security Groups</td>
+            <td><code>aws ec2 describe-security-groups</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-security-groups.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>Retrieve Metadata (EC2)</td>
+            <td><code>curl http://169.254.169.254/latest/meta-data/</code></td>
+            <td><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-data-categories.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>Assume IAM Role</td>
+            <td><code>aws sts assume-role --role-arn [role-arn] --role-session-name session_name</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>Get Account Details</td>
+            <td><code>aws sts get-caller-identity</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/sts/get-caller-identity.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>List Access Keys for IAM User</td>
+            <td><code>aws iam list-access-keys --user-name [username]</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/iam/list-access-keys.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>Describe Network Interfaces</td>
+            <td><code>aws ec2 describe-network-interfaces</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-network-interfaces.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>List VPCs</td>
+            <td><code>aws ec2 describe-vpcs</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-vpcs.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>IAM Role Policy</td>
+            <td><code>aws iam get-role-policy --role-name [role-name] --policy-name [policy-name]</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/iam/get-role-policy.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>Download S3 Object</td>
+            <td><code>aws s3 cp s3://bucket-name/key /local-path</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/s3/cp.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>Describe Route Tables</td>
+            <td><code>aws ec2 describe-route-tables</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-route-tables.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>Check IAM Policies</td>
+            <td><code>aws iam list-attached-user-policies --user-name [username]</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/iam/list-attached-user-policies.html" target="_blank">AWS Docs</a></td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

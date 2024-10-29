@@ -1,0 +1,203 @@
+/* Layout Responsivo */
+@media (min-width: 1000px) {
+    body {
+        width: 800px;
+        margin: 40px auto;
+    }
+    p {
+        text-align: justify;
+    }
+}
+@media not all and (min-width: 1000px) {
+    .github-corner {
+        display: none;
+    }
+}
+@media (max-width: 500px) {
+    .header-box {
+        flex-direction: column;
+    }
+    #app-table th:nth-child(3), #app-table td:nth-child(3),
+    #app-table th:nth-child(4), #app-table td:nth-child(4) {
+        display: none;
+    }
+}
+
+/* Estilos Gerais */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Estilos do Menu de Navegação */
+nav {
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 4px;
+}
+nav a:hover {
+    background-color: #555;
+    color: #d9d9d9;
+}
+
+/* Estilos para <code> e <pre> */
+code {
+    padding: 0.15em 0.25em;
+    border-radius: 0.25em;
+    font-weight: bold;
+    background: #f9f9f9;
+    font-family: Consolas, monospace;
+}
+pre {
+    background: #f9f9f9;
+    padding: 1em;
+    overflow-x: auto;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Esquema de Cores para as Tabelas */
+.gcp-section code {
+    color: #2ecc71; /* Verde para GCP */
+}
+.aws-section code {
+    color: #e67e22; /* Laranja para AWS */
+}
+.azure-section code {
+    color: #3498db; /* Azul para Azure */
+}
+
+/* Cabeçalhos e Links */
+h2 .permalink, h3 .permalink, h4 .permalink, h5 .permalink, h5 .permalink {
+    margin-left: 5px;
+    text-decoration: none;
+    visibility: hidden;
+}
+h2:hover .permalink, h3:hover .permalink, h4:hover .permalink, h5:hover .permalink, h5:hover .permalink {
+    visibility: visible;
+}
+h2:target, h3:target, h4:target, h5:target, h5:target {
+    border-left: 5px solid #0073e6;
+    padding-left: 5px;
+}
+h3, h4 {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Campo de Pesquisa e Tabela */
+#app-search {
+    margin-top: 1em;
+    padding: 0.5em;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff; /* Removendo fundo escuro, substituindo por branco */
+    color: #333; /* Cor do texto */
+}
+#app-search::placeholder {
+    color: #aaa; /* Cor do placeholder */
+}
+
+#app-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+#app-table th, #app-table td {
+    padding: 0.5em;
+    overflow-wrap: anywhere;
+    border-bottom: 1px solid #ddd;
+}
+#app-table th {
+    text-align: left;
+    background-color: #f1f1f1;
+}
+#app-table tbody tr:hover {
+    background: #f9f9f9;
+    transition: background-color 0.3s;
+}
+#app-table #search-message {
+    display: none;
+    text-align: center;
+    padding: 1em;
+}
+
+/* Sombras Suaves e Transições */
+a {
+    transition: color 0.3s;
+}
+table {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+}
+tr:hover td {
+    background-color: #fafafa;
+}
+
+/* Estilos para Itens de Lista e Funções */
+ul {
+    margin: 0;
+    list-style-position: inside;
+    padding-left: 0;
+}
+li {
+    position: relative;
+    display: inline-block;
+    padding: 0.25em 0.5em;
+    margin: 0.2em;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: border-color 0.3s, color 0.3s;
+}
+li:hover {
+    border-color: #555;
+    background-color: #f1f1f1;
+}
+.function-list {
+    font-size: 0.9rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.function-list li a:link, .function-list li a:visited {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.function-list li:hover, .function-list li a:hover {
+    color: #0d89b3;
+    border-color: #0d89b3;
+}
+
+/* Header Box e Botões do GitHub */
+.github-buttons {
+    display: inline-block;
+    margin-left: 10px;
+}
+.github-buttons a.github-button {
+    visibility: hidden;
+}
+.header-box {
+    display: flex;
+    align-items: center;
+    background-color: #f7f9fb;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: box-shadow 0.3s;
+}
+.header-box
