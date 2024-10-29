@@ -514,6 +514,66 @@
             <td><code>aws iam list-attached-user-policies --user-name [username]</code></td>
             <td><a href="https://docs.aws.amazon.com/cli/latest/reference/iam/list-attached-user-policies.html" target="_blank">AWS Docs</a></td>
         </tr>
+	        <tr>
+            <td>Create IAM User</td>
+            <td><code>aws iam create-user --user-name [USER_NAME]</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/iam/create-user.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>Attach Policy to User</td>
+            <td><code>aws iam attach-user-policy --user-name [USER_NAME] --policy-arn arn:aws:iam::aws:policy/[POLICY_NAME]</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/iam/attach-user-policy.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>Create Access Key for User</td>
+            <td><code>aws iam create-access-key --user-name [USER_NAME]</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/iam/create-access-key.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>Assign IAM Role to EC2 Instance</td>
+            <td><code>aws ec2 associate-iam-instance-profile --instance-id [INSTANCE_ID] --iam-instance-profile Name=[PROFILE_NAME]</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/ec2/associate-iam-instance-profile.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>Connect to EC2 Instance via SSH</td>
+            <td><code>ssh -i [YOUR_KEY.pem] ec2-user@[INSTANCE_PUBLIC_DNS]</code></td>
+            <td><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>Upload File to EC2 Instance via SCP</td>
+            <td><code>scp -i [YOUR_KEY.pem] localfile.txt ec2-user@[INSTANCE_PUBLIC_DNS]:~/remotefile.txt</code></td>
+            <td><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>Describe IAM Policies for Role</td>
+            <td><code>aws iam list-attached-role-policies --role-name [ROLE_NAME]</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/iam/list-attached-role-policies.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>Delete IAM User</td>
+            <td><code>aws iam delete-user --user-name [USER_NAME]</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/iam/delete-user.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>List EC2 Instances by Tags</td>
+            <td><code>aws ec2 describe-instances --filters "Name=tag:Name,Values=[TAG_NAME]"</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>Rotate Access Key for IAM User</td>
+            <td><code>aws iam create-access-key --user-name [USER_NAME]</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/iam/create-access-key.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>Describe Security Group Rules</td>
+            <td><code>aws ec2 describe-security-groups --group-ids [GROUP_ID]</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-security-groups.html" target="_blank">AWS Docs</a></td>
+        </tr>
+        <tr>
+            <td>Update IAM Role Trust Policy</td>
+            <td><code>aws iam update-assume-role-policy --role-name [ROLE_NAME] --policy-document file://trust-policy.json</code></td>
+            <td><a href="https://docs.aws.amazon.com/cli/latest/reference/iam/update-assume-role-policy.html" target="_blank">AWS Docs</a></td>
+        </tr>
     </tbody>
 </table>
 
