@@ -120,22 +120,22 @@
             <td><code>az network nsg list --output table</code></td>
             <td><a href="https://learn.microsoft.com/cli/azure/network/nsg" target="_blank">Azure Docs</a></td>
         </tr>
-		<tr>
-			<td>Get Active Directory User</td>
-			<td><code>Get-AzADUser -DisplayName [UserName]</code></td>
-			<td><a href="https://learn.microsoft.com/en-us/powershell/module/az.resources/get-azaduser" target="_blank">Azure Docs</a></td>
-		</tr>
-		<tr>
-			<td>Enumerate Virtual Network Subnets</td>
-			<td><code>az network vnet subnet list --resource-group [RG_NAME] --vnet-name [VNET_NAME]</code></td>
-			<td><a href="https://learn.microsoft.com/en-us/cli/azure/network/vnet/subnet" target="_blank">Azure Docs</a></td>
-		</tr>
-		<tr>
-			<td>Check Key Vault Access Policies</td>
-			<td><code>az keyvault show --name [VAULT_NAME] --query "properties.accessPolicies"</code></td>
-			<td><a href="https://learn.microsoft.com/en-us/cli/azure/keyvault" target="_blank">Azure Docs</a></td>
-		</tr>
-		<tr>
+	<tr>
+		<td>Get Active Directory User</td>
+		<td><code>Get-AzADUser -DisplayName [UserName]</code></td>
+		<td><a href="https://learn.microsoft.com/en-us/powershell/module/az.resources/get-azaduser" target="_blank">Azure Docs</a></td>
+	</tr>
+	<tr>
+		<td>Enumerate Virtual Network Subnets</td>
+		<td><code>az network vnet subnet list --resource-group [RG_NAME] --vnet-name [VNET_NAME]</code></td>
+		<td><a href="https://learn.microsoft.com/en-us/cli/azure/network/vnet/subnet" target="_blank">Azure Docs</a></td>
+	</tr>
+	<tr>
+		<td>Check Key Vault Access Policies</td>
+		<td><code>az keyvault show --name [VAULT_NAME] --query "properties.accessPolicies"</code></td>
+		<td><a href="https://learn.microsoft.com/en-us/cli/azure/keyvault" target="_blank">Azure Docs</a></td>
+	</tr>
+	<tr>
 			<td>List SQL Servers in Subscription</td>
 			<td><code>az sql server list</code></td>
 			<td><a href="https://learn.microsoft.com/en-us/cli/azure/sql/server" target="_blank">Azure CLI</a></td>
@@ -180,7 +180,56 @@
 			<td><code>az ad sp list --all --query "[].displayName"</code></td>
 			<td><a href="https://learn.microsoft.com/en-us/cli/azure/ad/sp" target="_blank">Azure CLI</a></td>
 		</tr>
-
+	<tr>
+            <td>Create Service Principal</td>
+            <td><code>az ad sp create-for-rbac --name [SERVICE_PRINCIPAL_NAME] --role contributor --scopes /subscriptions/[SUBSCRIPTION_ID]</code></td>
+            <td><a href="https://learn.microsoft.com/cli/azure/ad/sp" target="_blank">Azure Docs</a></td>
+        </tr>
+        <tr>
+            <td>Assign Role to Service Principal</td>
+            <td><code>az role assignment create --assignee [SP_ID] --role contributor --scope /subscriptions/[SUBSCRIPTION_ID]</code></td>
+            <td><a href="https://learn.microsoft.com/cli/azure/role/assignment" target="_blank">Azure Docs</a></td>
+        </tr>
+        <tr>
+            <td>List Service Principal Permissions</td>
+            <td><code>az ad sp show --id [SERVICE_PRINCIPAL_ID]</code></td>
+            <td><a href="https://learn.microsoft.com/cli/azure/ad/sp" target="_blank">Azure Docs</a></td>
+        </tr>
+        <tr>
+            <td>Generate SSH Key for VM Access</td>
+            <td><code>ssh-keygen -t rsa -b 2048 -f ~/.ssh/azure_key</code></td>
+            <td><a href="https://learn.microsoft.com/cli/azure" target="_blank">Azure CLI</a></td>
+        </tr>
+        <tr>
+            <td>Upload SSH Key to VM</td>
+            <td><code>az vm user update --resource-group [RG_NAME] --name [VM_NAME] --username [USERNAME] --ssh-key-value ~/.ssh/azure_key.pub</code></td>
+            <td><a href="https://learn.microsoft.com/cli/azure/vm/user" target="_blank">Azure Docs</a></td>
+        </tr>
+        <tr>
+            <td>SSH into VM</td>
+            <td><code>ssh -i ~/.ssh/azure_key [USERNAME]@[VM_PUBLIC_IP]</code></td>
+            <td><a href="https://learn.microsoft.com/cli/azure/vm" target="_blank">Azure CLI</a></td>
+        </tr>
+        <tr>
+            <td>Upload File to VM over SSH</td>
+            <td><code>scp -i ~/.ssh/azure_key ~/localfile.txt [USERNAME]@[VM_PUBLIC_IP]:~/remotefile.txt</code></td>
+            <td><a href="https://learn.microsoft.com/cli/azure/vm" target="_blank">Azure CLI</a></td>
+        </tr>
+        <tr>
+            <td>List Role Assignments for User</td>
+            <td><code>az role assignment list --assignee [USER_ID]</code></td>
+            <td><a href="https://learn.microsoft.com/cli/azure/role/assignment" target="_blank">Azure Docs</a></td>
+        </tr>
+        <tr>
+            <td>Create New User in Active Directory</td>
+            <td><code>az ad user create --display-name "[DISPLAY_NAME]" --password "[PASSWORD]" --user-principal-name [USER_NAME]</code></td>
+            <td><a href="https://learn.microsoft.com/cli/azure/ad/user" target="_blank">Azure Docs</a></td>
+        </tr>
+        <tr>
+            <td>Set User Account Permissions</td>
+            <td><code>az role assignment create --assignee [USER_ID] --role reader --scope /subscriptions/[SUBSCRIPTION_ID]</code></td>
+            <td><a href="https://learn.microsoft.com/cli/azure/role/assignment" target="_blank">Azure CLI</a></td>
+        </tr>
 
     </tbody>
 </table>
@@ -290,6 +339,56 @@
             <td>Access Logs for Activity</td>
             <td><code>gcloud logging read "resource.type=gce_instance"</code></td>
             <td><a href="https://cloud.google.com/logging/docs/view/advanced-queries" target="_blank">GCP Docs</a></td>
+        </tr>
+	        <tr>
+            <td>Create Service Account</td>
+            <td><code>gcloud iam service-accounts create [SERVICE_ACCOUNT_NAME] --display-name="Service Account for Red Team"</code></td>
+            <td><a href="https://cloud.google.com/iam/docs/creating-managing-service-accounts" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>Assign Role to Service Account</td>
+            <td><code>gcloud projects add-iam-policy-binding [PROJECT_ID] --member="serviceAccount:[SERVICE_ACCOUNT_EMAIL]" --role="roles/editor"</code></td>
+            <td><a href="https://cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>Create Service Account Key</td>
+            <td><code>gcloud iam service-accounts keys create ~/key.json --iam-account [SERVICE_ACCOUNT_EMAIL]</code></td>
+            <td><a href="https://cloud.google.com/iam/docs/creating-managing-service-account-keys" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>Enable SSH Access on Instance</td>
+            <td><code>gcloud compute ssh [INSTANCE_NAME] --zone [ZONE]</code></td>
+            <td><a href="https://cloud.google.com/compute/docs/instances/connecting-to-instance" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>Connect to Instance with SSH Key</td>
+            <td><code>gcloud compute ssh [INSTANCE_NAME] --zone [ZONE] --ssh-key-file=~/.ssh/[YOUR_KEY]</code></td>
+            <td><a href="https://cloud.google.com/sdk/gcloud/reference/compute/ssh" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>List Active SSH Connections</td>
+            <td><code>gcloud compute instances get-serial-port-output [INSTANCE_NAME] --zone [ZONE]</code></td>
+            <td><a href="https://cloud.google.com/compute/docs/troubleshooting/using-serial-console" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>Upload File to Instance via SSH</td>
+            <td><code>gcloud compute scp ~/localfile.txt [INSTANCE_NAME]:~/remotefile.txt --zone [ZONE]</code></td>
+            <td><a href="https://cloud.google.com/compute/docs/instances/transfer-files" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>Set Metadata for SSH Access</td>
+            <td><code>gcloud compute project-info add-metadata --metadata ssh-keys="[USERNAME]:ssh-rsa [KEY]"</code></td>
+            <td><a href="https://cloud.google.com/compute/docs/instances/adding-removing-ssh-keys" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>List Service Account Permissions</td>
+            <td><code>gcloud projects get-iam-policy [PROJECT_ID] --filter="bindings.members:[SERVICE_ACCOUNT_EMAIL]"</code></td>
+            <td><a href="https://cloud.google.com/iam/docs/granting-changing-revoking-access" target="_blank">GCP Docs</a></td>
+        </tr>
+        <tr>
+            <td>Delete Service Account Key</td>
+            <td><code>gcloud iam service-accounts keys delete [KEY_ID] --iam-account [SERVICE_ACCOUNT_EMAIL]</code></td>
+            <td><a href="https://cloud.google.com/iam/docs/creating-managing-service-account-keys" target="_blank">GCP Docs</a></td>
         </tr>
     </tbody>
 </table>
