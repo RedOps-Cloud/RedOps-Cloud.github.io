@@ -2,7 +2,7 @@
 
 **RedOps Cloud** is a repository designed for security professionals focusing on offensive operations and security analysis in multi-cloud environments, such as **AWS**, **Azure**, and **GCP**. This project provides ready-to-use commands, fileless attack strategies, and advanced techniques for Red Teamers and pentesters.
 
----
+----
 
 ## 📚 About the Project
 
