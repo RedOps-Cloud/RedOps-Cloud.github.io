@@ -1,4 +1,4 @@
-# Contributing to LOLCloud
+# Contributing to RedOps Cloud
 
 Thank you for considering a contribution to this project! Your support and collaboration help improve the quality and accuracy of this resource. Here’s how you can get involved:
 
@@ -13,7 +13,7 @@ Your feedback and expertise are essential to ensure this resource remains reliab
 1. **Fork the Repository**: Start by forking the repository to your own GitHub account.
 2. **Clone the Repository**: Clone the forked repository to your local machine for edits.
    ```bash
-   git clone https://github.com/LOLAD-Project/LOLAD-Project.github.io
+   git clone https://github.com/RedOps-Cloud/RedOps-Cloud.github.io/blob/main/Contributing.md
    ```
 3. **Create a New Branch**: For any new feature, bug fix, or enhancement, create a separate branch.
    ```bash
